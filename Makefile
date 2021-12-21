@@ -8,13 +8,14 @@ PRECOMMIT_CONF := .pre-commit-config.yaml
 
 .DEFAULT_GOAL := help
 
-all: format precommit docs install export build
+all: test build export docs
 
 .PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo ""
 	@echo "  install     install packages and prepare the development environment"
+	@echo "  update      force-udpate packages and prepare the development environment"
 	@echo "  production  install packages and prepare the production environment"
 	@echo "  build       build dist wheel and tarball files"
 	@echo "  export      export all requirements to requirements.txt"
@@ -31,6 +32,15 @@ install: $(INSTALL_STAMP)
 $(INSTALL_STAMP): pyproject.toml poetry.lock
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
 	$(POETRY) install --no-root
+	$(POETRY) lock --no-update
+	$(POETRY) run pre-commit install
+	$(POETRY) run pre-commit autoupdate
+	touch $(INSTALL_STAMP)
+
+update: pyproject.toml
+	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
+	$(POETRY) update
+	$(POETRY) lock --no-update
 	$(POETRY) run pre-commit install
 	$(POETRY) run pre-commit autoupdate
 	touch $(INSTALL_STAMP)
@@ -61,13 +71,13 @@ docs: $(EXPORT_STAMP)
 .PHONY: clean
 clean:
 	find . -type d -name "__pycache__" | xargs rm -rf {};
-	rm -rf $(INSTALL_STAMP) $(PRODUCTION_STAMP) .coverage .mypy_cache
+	rm -rf $(INSTALL_STAMP) $(PRODUCTION_STAMP) $(EXPORT_STAMP) $(BUILD_STAMP) .coverage .mypy_cache
 
 .PHONY: lint
 lint: $(INSTALL_STAMP)
 	$(POETRY) run isort --profile=black --check-only ./tests/ $(NAME)
 	$(POETRY) run black --check ./tests/ $(NAME) --diff
-	$(POETRY) run flake8 ./tests/ $(NAME)
+	$(POETRY) run flake8 --max-line-length 120 ./tests/ $(NAME)
 	$(POETRY) run mypy ./tests/ $(NAME)
 	$(POETRY) run bandit -r $(NAME) -s B608
 
