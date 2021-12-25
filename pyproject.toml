@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wolproxypycli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A PyPI module and Typer (CLI) app for sending Wake-On-LAN packets"
 authors = ["Fabio Calefato <fabio.calefato@uniba.it>"]
 license = "MIT"
@@ -25,7 +25,6 @@ black = "^21.12b0"
 pylint = "^2.12.2"
 mypy = "^0.920"
 bandit = "^1.7.1"
-autopep8 = "^1.6.0"
 pre-commit = "^2.16.0"
 mkdocs = "^1.2.3"
 mkdocstrings = "^0.16.2"
@@ -37,3 +36,19 @@ pytest-cov = "^3.0.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line_length = 120
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.bandit]
+skips = ["B104","B610","B611","B702","B703"]
+
+[tool.pydocstyle]
+ignore = "D104,D203,D213,D406,D407,D413"
