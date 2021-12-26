@@ -6,7 +6,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bateman/wolproxypycli/pypi)
 [![Documentation Status](https://readthedocs.org/projects/wolproxypycli/badge/?version=latest)](https://wolproxypycli.readthedocs.io/en/latest/?badge=latest)
 
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/bateman/wolproxypycli)
+[![Known Vulnerabilities](https://snyk.io/test/github/bateman/wolproxypycli/badge.svg)](https://snyk.io/test/github/bateman/wolproxypycli)
 ![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/bateman/wolproxypycli)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/bateman/wolproxypycli)
 

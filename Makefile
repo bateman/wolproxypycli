@@ -10,7 +10,7 @@ DOCKER := $(shell command -v docker-compose 2> /dev/null)
 
 .DEFAULT_GOAL := help
 
-all: test build export docs docker
+all: test build export docs
 
 .PHONY: help
 help:
