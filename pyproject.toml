@@ -49,6 +49,7 @@ ignore_missing_imports = true
 
 [tool.bandit]
 skips = ["B104","B610","B611","B702","B703"]
+exclude_dirs = ["tests/"]
 
 [tool.pydocstyle]
 ignore = "D104,D203,D213,D406,D407,D413"
