@@ -1,6 +1,4 @@
-"""The main module of the wolproxypy application.
-
-"""
+"""The main module of the wolproxypy application."""
 
 import wakeonlan
 from typer import Typer
@@ -37,9 +35,7 @@ def wol(
     """
     logger.info("Sending WOL magic packet to address %s", mac)
     try:
-        wakeonlan.send_magic_packet(
-            *(mac,), ip_address=ip, port=port, interface=interface
-        )
+        wakeonlan.send_magic_packet(*(mac,), ip_address=ip, port=port, interface=interface)
         status = STATUS_OK
     except Exception as ex:
         logger.error(ex)
