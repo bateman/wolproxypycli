@@ -34,6 +34,10 @@ def wol(
         status: "success" if the magic packet was sent successfully; "failure" otherwise.
     """
     logger.info("Sending WOL magic packet to address %s", mac)
+    if ip is None or ip == "":
+        ip = "255.255.255.255"
+    if port is None or port <= 0 or port > 65535:
+        port = 9
     try:
         wakeonlan.send_magic_packet(*(mac,), ip_address=ip, port=port, interface=interface)
         status = STATUS_OK
