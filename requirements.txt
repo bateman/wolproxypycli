@@ -65,3 +65,5 @@ wakeonlan==2.1.0; python_version >= "3.6" and python_version < "4.0"
 watchdog==2.1.6; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.6"
 wrapt==1.13.3; python_full_version >= "3.6.2"
 zipp==3.7.0; python_version >= "3.7"
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
