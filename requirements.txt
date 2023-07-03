@@ -41,7 +41,7 @@ py==1.11.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_
 pycodestyle==2.8.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 pydocstyle==6.1.1; python_version >= "3.6"
 pyflakes==2.4.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
-pygments==2.11.1; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.5"
+pygments==2.15.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.5"
 pylint==2.12.2; python_full_version >= "3.6.2"
 pymdown-extensions==9.1; python_version >= "3.6"
 pyparsing==3.0.6; python_version >= "3.6"
