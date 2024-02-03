@@ -1,4 +1,5 @@
 """Configuration file for the application."""
+
 import logging
 import logging.config
 from pathlib import Path

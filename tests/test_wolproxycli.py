@@ -1,4 +1,5 @@
 """Unit tests for the core module."""
+
 import socket
 from unittest.mock import Mock, call, patch
 
