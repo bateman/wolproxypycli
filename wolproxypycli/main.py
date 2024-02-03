@@ -1,5 +1,7 @@
 """The main module of the wolproxypy application."""
 
+from typing import Optional
+
 import wakeonlan
 from typer import Typer
 
@@ -16,7 +18,7 @@ def wol(
     mac: str,
     ip: str = wakeonlan.BROADCAST_IP,
     port: int = wakeonlan.DEFAULT_PORT,
-    interface: str = None,
+    interface: Optional[str] = None,
 ) -> str:
     """Wake up computers having any of the given mac addresses.
 
