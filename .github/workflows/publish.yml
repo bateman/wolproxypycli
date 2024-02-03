@@ -24,7 +24,8 @@ jobs:
     #- name: Run tests
     #  run: make test
     - name: Publish PyPi package
-      uses: code-specialist/pypi-poetry-publish@v1
+      uses: celsiusnarhwal/poetry-publish@v2
       with:
-        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_REGISTRY_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        python-version: 3.12
+        poetry-version: 1.7.1
+        token: ${{ secrets.PYPI_TOKEN }}
