@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build, test, and publish to PyPI
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
@@ -21,8 +23,8 @@ jobs:
       run: make install
     #- name: Run tests
     #  run: make test
-    - name: Build and publish to pypi
-      uses: JRubics/poetry-publish@v1.17
+    - name: Publish PyPi package
+      uses: code-specialist/pypi-poetry-publish@v1
       with:
-        python_version: 3.12-dev
-        pypi_token: ${{ secrets.PYPI_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_REGISTRY_PASSWORD: ${{ secrets.PYPI_TOKEN }}
