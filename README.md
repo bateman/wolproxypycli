@@ -1,10 +1,15 @@
 # wolproxypycli
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/wolproxypycli)
-![PyPI](https://img.shields.io/pypi/v/wolproxypycli)
 ![GitHub](https://img.shields.io/github/license/bateman/wolproxypycli)
 
 [![pypi](https://github.com/bateman/wolproxypycli/actions/workflows/publish.yml/badge.svg)](https://github.com/bateman/wolproxypycli/actions/workflows/publish.yml)
 [![Documentation Status](https://readthedocs.org/projects/wolproxypycli/badge/?version=latest)](https://wolproxypycli.readthedocs.io/en/latest/?badge=latest)
+
+
+![PyPI](https://img.shields.io/pypi/v/wolproxypycli)
+![PyPI - Format](https://img.shields.io/pypi/format/wolproxypycli)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/wolproxypycli)
+
 
 [![Known Vulnerabilities](https://snyk.io/test/github/bateman/wolproxypycli/badge.svg)](https://snyk.io/test/github/bateman/wolproxypycli)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/bateman/wolproxypycli)
