@@ -29,7 +29,7 @@ bandit = "^1.7.1"
 pre-commit = "^2.16.0"
 pydocstyle = "^6.1.1"
 pytest = "^6.2.5"
-pytest-cov = "^3.0.0"
+pytest-cov = ">=3,<5"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.5.3"
