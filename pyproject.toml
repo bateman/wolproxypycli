@@ -57,3 +57,6 @@ exclude_dirs = ["tests/"]
 
 [tool.pydocstyle]
 ignore = "D104,D203,D213,D406,D407,D413"
+
+[tool.pytest.ini_options]
+addopts = ["--cov-fail-under=50", "--cov-report=term-missing", "--cov=wolproxypycli"]
