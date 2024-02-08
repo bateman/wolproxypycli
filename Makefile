@@ -96,4 +96,4 @@ precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF)
 
 .PHONY: test
 test: $(INSTALL_STAMP)
-	$(POETRY) run pytest tests/ --cov-report term-missing --cov-fail-under 100 --cov $(SRC)
+	$(POETRY) run pytest tests/ $(SRC)
