@@ -1927,13 +1927,13 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "wakeonlan"
-version = "2.1.0"
+version = "3.1.0"
 description = "A small python module for wake on lan."
 optional = false
-python-versions = ">=3.6,<4.0"
+python-versions = ">=3.7,<4.0"
 files = [
-    {file = "wakeonlan-2.1.0-py3-none-any.whl", hash = "sha256:f8fd7680118fcf5e6eea9ac871e425237754ce8995c7099783065df9f03c05a2"},
-    {file = "wakeonlan-2.1.0.tar.gz", hash = "sha256:c9deddcdf72256dd31f884b1c971c6d6af97730df2d33782cca8a9d3c28f2080"},
+    {file = "wakeonlan-3.1.0-py3-none-any.whl", hash = "sha256:9414da87f48e5dc8a1bb0fa15aba5a0079cfd014231c4cc8e6f2477a0d078c7e"},
+    {file = "wakeonlan-3.1.0.tar.gz", hash = "sha256:aa12edc2587353528a89ad58a54c63212dc2a12226c186b7fcc02caa162cd962"},
 ]
 
 [[package]]
@@ -2064,4 +2064,4 @@ cffi = ">=1.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "f52935df1dc4a98ef3e2edde6298d47fe3830de5cc540325a923aeb4c131ef66"
+content-hash = "1b12a958bd0aecb99d2d238ea8807a7dad96fab7e7cad9d1cf0d1682e62e17b6"
