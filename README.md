@@ -65,17 +65,17 @@ poetry run wolproxypycli --help
 ```
 
 ```
-╭─ Arguments ────────────────────────────────────────────────────────────────────────────────────────────╮
-│ * mac                 TEXT     [default: None] [required]                                              │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --ip                  TEXT     [default: 255.255.255.255]                                              │
-│ --port                INTEGER  [default: 9]                                                            │
-│ --interface           TEXT     [default: None]                                                         │
-│ --install-completion  Install completion for the current shell.                                        │
-│ --show-completion     Show completion for the current shell, to copy it or customize the installation. │
-│ --help                Show this message and exit.                                                      │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Arguments ──────────────────────────────────────────────────────╮
+│ * mac                 TEXT     [default: None] [required]        │
+╰──────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────╮
+│ --ip                  TEXT     [default: 255.255.255.255]        │
+│ --port                INTEGER  [default: 9]                      │
+│ --interface           TEXT     [default: None]                   │
+│ --install-completion  Install completion for the current shell.  │
+│ --show-completion     Show completion for the current shell.     │
+│ --help                Show this message and exit.                │
+╰──────────────────────────────────────────────────────────────────╯
 ```
 
 ### Module
