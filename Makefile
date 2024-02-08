@@ -104,5 +104,5 @@ precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF)
 	$(POETRY) run pre-commit run --all-files
 
 .PHONY: tests
-test: $(INSTALL_STAMP)
+tests: $(INSTALL_STAMP)
 	$(POETRY) run pytest tests/ $(SRC)
