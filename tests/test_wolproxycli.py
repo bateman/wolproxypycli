@@ -6,7 +6,6 @@ from unittest.mock import Mock, call, patch
 import pytest
 
 import wolproxypycli
-import wolproxypycli.main as wolproxy
 from wolproxypycli.main import STATUS_FAIL, STATUS_OK, wol
 
 
