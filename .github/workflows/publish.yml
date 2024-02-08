@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build and publish to PyPI
+    name: Check out, run tests, and publish to PyPI
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,6 +21,8 @@ jobs:
     - run: poetry --version
     - name: Install dependencies
       run: make install
+    - name: Run tests
+      run: make test
     - name: Publish PyPi package
       uses: celsiusnarhwal/poetry-publish@v2
       with:
