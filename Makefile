@@ -100,7 +100,7 @@ format: $(INSTALL_STAMP)
 	$(POETRY) run black tests/ $(SRC)
 
 .PHONY: precommit
-precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF)
+precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF) lint
 	$(POETRY) run pre-commit run --all-files
 
 .PHONY: tests
