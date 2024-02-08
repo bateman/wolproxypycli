@@ -20,7 +20,7 @@ jobs:
     - uses: Gr1N/setup-poetry@v8
     - run: poetry --version
     - name: Install dependencies
-      run: make install
+      run: make install-dev
     - name: Run tests
       run: make test
     - name: Publish PyPi package
