@@ -16,7 +16,8 @@ all: test build export docs
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo ""
-	@echo "  install     install packages and prepare the development environment"
+	@echo "  install     install the package without source"
+	@echo "  install-dev install the package and prepare the development environment"
 	@echo "  update      force-udpate packages and prepare the development environment"
 	@echo "  production  install packages and prepare the production environment"
 	@echo "  build       build dist wheel and tarball files"
@@ -33,7 +34,15 @@ help:
 install: $(INSTALL_STAMP)
 $(INSTALL_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install --no-root
+	$(POETRY) install --no-root --no-dev
+	$(POETRY) lock --no-update
+	$(POETRY) run pre-commit install
+	touch $(INSTALL_STAMP)
+
+install-dev: $(INSTALL_STAMP)
+$(INSTALL_STAMP): pyproject.toml
+	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
+	$(POETRY) install
 	$(POETRY) lock --no-update
 	$(POETRY) run pre-commit install
 	touch $(INSTALL_STAMP)
