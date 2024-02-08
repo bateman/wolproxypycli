@@ -22,7 +22,7 @@ A PyPI module and Typer (CLI) app for sending Wake-On-LAN packets
 
 ## Installation
 
-This project uses [Poetry](https://python-poetry.org/) for dependency management. To install the project, first install Poetry, then run the following command in the project root directory:
+This project uses [Poetry](https://python-poetry.org/) for dependency management. To install the project, first install `poetry`, then run the following command in the project root directory:
 
 ```bash
 poetry install
