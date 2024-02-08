@@ -7,6 +7,7 @@ import pytest
 
 import wolproxypycli
 import wolproxypycli.main as wolproxy
+from wolproxypycli.main import STATUS_FAIL, STATUS_OK, wol
 
 
 def generate_magic_packet(mac_address):
@@ -27,7 +28,7 @@ def generate_magic_packet(mac_address):
 @patch("socket.socket")
 def test_wol(sock: Mock, mac, packet) -> None:
     """Test whether the magic packets are broadcasted to the specified network."""
-    wolproxy.wol(mac, ip="example.com", port=7)
+    wolproxypycli.main.wol(mac, ip="example.com", port=7)
     assert sock.mock_calls == [
         call(socket.AF_INET, socket.SOCK_DGRAM),
         call().__enter__(),
@@ -43,7 +44,7 @@ def test_wol_default(sock: Mock) -> None:
     """Test whether the magic packets are broadcasted using default values."""
     mac = "133713371337"
     packet = generate_magic_packet(mac)
-    wolproxy.wol(mac)
+    wolproxypycli.main.wol(mac)
     assert sock.mock_calls == [
         call(socket.AF_INET, socket.SOCK_DGRAM),
         call().__enter__(),
@@ -59,7 +60,7 @@ def test_wol_interface(sock: Mock) -> None:
     """Test whether the magic packets are broadcasted to the specified network via specified interface."""
     mac = "133713371337"
     packet = generate_magic_packet(mac)
-    wolproxy.wol(mac, ip="example.com", port=7, interface="192.168.0.2")
+    wolproxypycli.main.wol(mac, ip="example.com", port=7, interface="192.168.0.2")
     assert sock.mock_calls == [
         call(socket.AF_INET, socket.SOCK_DGRAM),
         call().__enter__(),
@@ -84,3 +85,21 @@ def test_main(wol: Mock) -> None:
         call(["00:11:22:33:44:55", "-i", "host.example", "-p", "1337"]),
         call(["00:11:22:33:44:55", "-i", "host.example", "-p", "1337", "-n", "192.168.0.2"]),
     ]
+
+
+@patch("wolproxypycli.main.wakeonlan.send_magic_packet")
+def test_wol_success(mock_send_magic_packet):
+    """Test successful wake on lan."""
+    mac = "AA:BB:CC:DD:EE:FF"
+    ip = "192.168.0.1"
+    port = 9
+    interface = "192.168.0.2"
+    assert wol(mac, ip, port, interface) == STATUS_OK
+    mock_send_magic_packet.assert_called_once_with(mac, ip_address=ip, port=port, interface=interface)
+
+
+@patch("wolproxypycli.main.wakeonlan.send_magic_packet")
+def test_wol_failure(mock_send_magic_packet):
+    """Test failed wake on lan."""
+    mock_send_magic_packet.side_effect = Exception("Test exception")
+    assert wol("AA:BB:CC:DD:EE:FF") == STATUS_FAIL
