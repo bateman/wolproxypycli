@@ -99,4 +99,4 @@ precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF) lint
 
 .PHONY: tests
 tests: $(INSTALL_STAMP)
-	$(POETRY) run pytest $(TESTS) $(SRC)
+	$(POETRY) run pytest $(TESTS)
