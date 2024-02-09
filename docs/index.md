@@ -31,13 +31,15 @@ from wolproxypycli import wol
 wol(macaddress)
 ```
 
-Acceptable formats for supplying a mac address   are:
+Acceptable formats for supplying a mac address are:
+
 - `AA:BB:CC:DD:EE:FF`
 - `AA-BB-CC-DD-EE-FF`
 - `AABBCCDDEEFF`
 - `AABBCC.DDEEFF`
 
 As optional parameters you can supply also:
+
 - `ip` - the ip address of the host to send the magic packet to.
 - `port` - the port of the host to send the magic packet to.
 - `interface` the ip address of the network adapter to route the magic packet through.
