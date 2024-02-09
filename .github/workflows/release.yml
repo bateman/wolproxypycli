@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -16,6 +17,8 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
+    - name: Install Poetry
+      uses: Gr1N/setup-poetry@v8
     - name: Install dependencies
       run: make install
     - name: Run tests
@@ -25,7 +28,7 @@ jobs:
     name: Publish to PyPI
     runs-on: ubuntu-latest
     steps:
-    - name : Checkout
+    - name: Checkout
       uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -43,6 +46,7 @@ jobs:
         token: ${{ secrets.PYPI_TOKEN }}
   release:
     needs: publish
+    name: Release
     runs-on: ubuntu-latest
     steps:
     - name: Build package
