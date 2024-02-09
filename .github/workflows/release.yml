@@ -1,0 +1,62 @@
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: make install
+    - name: Run tests
+      run: make tests
+  publish:
+    needs: test
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    steps:
+    - name : Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+    - name: Install Poetry
+      uses: Gr1N/setup-poetry@v8
+    - name: Install dependencies
+      run: make production
+    - name: Publish PyPi package
+      uses: celsiusnarhwal/poetry-publish@v2
+      with:
+        python-version: 3.12
+        poetry-version: 1.7.1
+        token: ${{ secrets.PYPI_TOKEN }}
+  release:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build package
+      run: make build
+    - name: Retrieve tag
+      id: tag
+      run: echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        name: Release ${{ steps.tag.outputs.version }}
+        generate_release_notes:
+        files: |
+          "./dist/wolproxypycli-${{ steps.tag.outputs.version }}.tar.gz"
