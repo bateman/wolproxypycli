@@ -30,7 +30,7 @@ help:
 	@echo "  lint        run the code linters"
 	@echo "  format      reformat code"
 	@echo "  precommit   run the pre-commit checks on all files"
-	@echo "  test        run all the tests"
+	@echo "  tests       run all the tests"
 	@echo ""
 	@echo "Check the Makefile to know exactly what each target is doing."
 
@@ -106,9 +106,9 @@ format: $(INSTALL_STAMP)
 	$(POETRY) run black $(TESTS) $(SRC)
 
 .PHONY: precommit
-precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF)
+precommit: $(INSTALL_STAMP) $(PRECOMMIT_CONF) lint
 	$(POETRY) run pre-commit run --all-files
 
-.PHONY: test
-test: $(INSTALL_STAMP)
+.PHONY: tests
+tests: $(INSTALL_STAMP)
 	$(POETRY) run pytest $(TESTS) $(SRC)
