@@ -4,6 +4,7 @@ version = "0.1.6"
 description = "A PyPI module and Typer (CLI) app for sending Wake-On-LAN packets"
 authors = ["Fabio Calefato <fabio.calefato@uniba.it>"]
 license = "MIT"
+readme = "README.md"
 include = [
     "LICENSE",
 ]
