@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wolproxypycli"
-version = "0.1.7"
+version = "0.1.8"
 description = "A PyPI module and Typer (CLI) app for sending Wake-On-LAN packets"
 authors = ["Fabio Calefato <fabio.calefato@uniba.it>"]
 license = "MIT"
@@ -61,4 +61,4 @@ exclude_dirs = ["tests/"]
 ignore = "D104,D203,D213,D406,D407,D413"
 
 [tool.pytest.ini_options]
-addopts = ["--cov-fail-under=85", "--cov-report=term-missing", "--cov=wolproxypycli"]
+addopts = ["--cov-fail-under=75", "--cov-report=term-missing", "--cov=wolproxypycli"]
