@@ -35,7 +35,7 @@ help:
 install: $(INSTALL_STAMP)
 $(INSTALL_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install --no-root
+	$(POETRY) install
 	$(POETRY) lock --no-update
 	$(POETRY) run pre-commit install
 	touch $(INSTALL_STAMP)
@@ -52,7 +52,7 @@ $(UPDATE_STAMP): pyproject.toml
 production: $(PRODUCTION_STAMP)
 $(PRODUCTION_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install --no-dev --no-interaction
+	$(POETRY) install --only main --no-interaction
 	touch $(PRODUCTION_STAMP)
 
 build: $(BUILD_STAMP)
