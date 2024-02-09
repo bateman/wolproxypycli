@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wolproxypycli"
-version = "0.1.4"
+version = "0.1.5"
 description = "A PyPI module and Typer (CLI) app for sending Wake-On-LAN packets"
 authors = ["Fabio Calefato <fabio.calefato@uniba.it>"]
 license = "MIT"
