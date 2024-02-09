@@ -9,20 +9,18 @@ PRECOMMIT_CONF := .pre-commit-config.yaml
 SRC := $(NAME) config/
 TESTS := tests/
 POETRY := $(shell command -v poetry 2> /dev/null)
-DOCKER := $(shell command -v docker-compose 2> /dev/null)
 
 .DEFAULT_GOAL := help
 
-all: test build export docs
+all: tests build export docs
 
 .PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo ""
-	@echo "  install     install the package without source"
-	@echo "  install-dev install the package and prepare the development environment"
-	@echo "  update      force-udpate packages and prepare the development environment"
-	@echo "  production  install packages and prepare the production environment"
+	@echo "  install     install the package dependencies and prepare the development environment"
+	@echo "  update      force-udpate packages dependencies"
+	@echo "  production  install the root package for production"
 	@echo "  build       build dist wheel and tarball files"
 	@echo "  export      export all requirements to requirements.txt"
 	@echo "  docs        build documentation via MkDocs"
@@ -37,15 +35,7 @@ help:
 install: $(INSTALL_STAMP)
 $(INSTALL_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install --no-root --no-dev
-	$(POETRY) lock --no-update
-	$(POETRY) run pre-commit install
-	touch $(INSTALL_STAMP)
-
-install-dev: $(INSTALL_STAMP)
-$(INSTALL_STAMP): pyproject.toml
-	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install
+	$(POETRY) install --no-root
 	$(POETRY) lock --no-update
 	$(POETRY) run pre-commit install
 	touch $(INSTALL_STAMP)
@@ -62,7 +52,7 @@ $(UPDATE_STAMP): pyproject.toml
 production: $(PRODUCTION_STAMP)
 $(PRODUCTION_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) install --no-root --no-dev --no-interaction
+	$(POETRY) install --no-dev --no-interaction
 	touch $(PRODUCTION_STAMP)
 
 build: $(BUILD_STAMP)
@@ -72,7 +62,7 @@ $(BUILD_STAMP): pyproject.toml
 	$(POETRY) build
 	touch $(BUILD_STAMP)
 
-export: $(EXPORT_STAMP) udpate
+export: $(EXPORT_STAMP) update
 $(EXPORT_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
 	$(POETRY) export -f requirements.txt --output requirements.txt --without-hashes
@@ -92,16 +82,14 @@ clean:
 	rm -rf $(INSTALL_STAMP) $(PRODUCTION_STAMP) $(EXPORT_STAMP) $(BUILD_STAMP) .coverage .mypy_cache
 
 .PHONY: lint
-lint: $(INSTALL_STAMP)
-	$(POETRY) run isort --check-only $(TESTS) $(SRC)
-	$(POETRY) run black --check $(TESTS) $(SRC) --diff
+lint: format
 	$(POETRY) run flake8 --max-line-length 120 --ignore=E203,E266,E501,W503,F403,F401,E402,B008,FS001,FS003 $(TESTS) $(SRC)
 	$(POETRY) run mypy $(TESTS) $(SRC)
 	$(POETRY) run pydocstyle $(TESTS) $(SRC)
 	$(POETRY) run bandit -c pyproject.toml -r $(SRC)
 
 .PHONY: format
-format: $(INSTALL_STAMP)
+format:
 	$(POETRY) run isort $(TESTS) $(SRC)
 	$(POETRY) run black $(TESTS) $(SRC)
 
