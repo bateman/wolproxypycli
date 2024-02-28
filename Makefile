@@ -67,9 +67,9 @@ $(BUILD_STAMP): pyproject.toml
 export: $(EXPORT_STAMP) update
 $(EXPORT_STAMP): pyproject.toml
 	@if [ -z $(POETRY) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(POETRY) export -f requirements.txt --output requirements.txt --without-hashes
-	$(POETRY) export -f requirements.txt --output requirements-dev.txt --with dev --without-hashes
-	$(POETRY) export -f requirements.txt --output requirements-docs.txt --with docs --without-hashes
+	$(POETRY) export -f requirements.txt --output requirements.txt --without-hashes --without dev --without docs
+	$(POETRY) export -f requirements.txt --output requirements-dev.txt --without-hashes --with dev --without docs
+	$(POETRY) export -f requirements.txt --output requirements-docs.txt --without-hashes --only docs 
 	touch $(EXPORT_STAMP)
 
 docs: $(DOCS_STAMP) export
